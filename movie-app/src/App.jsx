@@ -1,6 +1,5 @@
 import './App.css'
 import MovieCard from './Components/MovieCard'
-
 function App() {
   const mov = [
     {Title:"Harry Potter and the Deathly Hallows: Part 2",Year:"2011",Poster:"https://m.media-amazon.com/images/M/MV5BOTA1Mzc2N2ItZWRiNS00MjQzLTlmZDQtMjU0NmY1YWRkMGQ4XkEyXkFqcGc@._V1_SX300.jpg"}
@@ -14,10 +13,7 @@ function App() {
   ]
   return (
     <>
-       <MovieCard movies={mov} />
-    
-   
-     
+       <MovieCard movies={mov} />  
     </>
   )
 }

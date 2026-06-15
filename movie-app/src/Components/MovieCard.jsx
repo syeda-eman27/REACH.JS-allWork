@@ -8,7 +8,6 @@ import {
   CardActions,
   CardActionArea,
 } from '@mui/material'
-
 let MovieCard = ({ movies }) => {
   return (
     <Grid container spacing={2} sx={{ py: 2 }}>
