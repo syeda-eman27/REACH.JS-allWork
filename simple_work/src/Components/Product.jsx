@@ -7,8 +7,4 @@ function Product({ title, price, quantity }) {
     </>
   );
 }
-
 export default Product;
-
-
-

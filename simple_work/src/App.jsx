@@ -11,6 +11,7 @@ function App() {
     age: 20,
     city: "karachi"
   }
+  
   return (
     <>
       <Student name={person.name} age={person.age} class={"BA"} />
