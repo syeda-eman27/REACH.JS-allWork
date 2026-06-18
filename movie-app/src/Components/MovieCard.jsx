@@ -1,79 +1,91 @@
+import { useNavigate } from 'react-router-dom'
 import {
   Grid,
   Card,
   CardContent,
   CardMedia,
   Typography,
-  Button,
-  CardActions,
+  Chip,
   CardActionArea,
+  Box,
 } from '@mui/material'
-let MovieCard = ({ movies }) => {
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+
+export default function MovieCard({ movies }) {
+  const navigate = useNavigate()
+
   return (
-    <Grid container spacing={2} sx={{ py: 2 }}>
-      {movies.map((x, idx) => (
-        <Grid key={x?.Title ?? `${idx}`} item xs={12} sm={6} md={4}>
+    <Grid container spacing={3} sx={{ py: 3, px: { xs: 2, md: 4 } }}>
+      {movies.map((movie) => (
+        <Grid key={movie.id} item xs={12} sm={6} md={4} lg={3}>
           <Card
             sx={{
-              maxWidth: 345,
               height: '100%',
               borderRadius: 3,
               overflow: 'hidden',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              background: '#1c1c2e',
+              border: '1px solid rgba(255,255,255,0.07)',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+              transition: 'transform 0.25s ease, box-shadow 0.25s ease',
               '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 18px 35px rgba(0,0,0,0.14)',
+                transform: 'translateY(-6px)',
+                boxShadow: '0 20px 40px rgba(245,197,24,0.15)',
               },
             }}
           >
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="190"
-                image={x.Poster}
-                alt={x.Title}
-                sx={{
-                  objectFit: 'cover',
-                  backgroundColor: '#f3f4f6',
-                }}
-              />
-              <CardContent sx={{ pb: 1.5 }}>
+            <CardActionArea onClick={() => navigate(`/movie/${movie.id}`)}>
+              <Box sx={{ position: 'relative' }}>
+                <CardMedia
+                  component="img"
+                  height="320"
+                  image={movie.Poster}
+                  alt={movie.Title}
+                  sx={{ objectFit: 'cover' }}
+                />
+                {/* Year Badge */}
+                <Chip
+                  icon={<CalendarMonthIcon sx={{ fontSize: 14, color: '#000 !important' }} />}
+                  label={movie.Year}
+                  size="small"
+                  sx={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 10,
+                    background: '#f5c518',
+                    color: '#000',
+                    fontWeight: 700,
+                    fontSize: '0.72rem',
+                  }}
+                />
+              </Box>
+
+              <CardContent sx={{ pb: 2 }}>
                 <Typography
-                  gutterBottom
-                  variant="h6"
-                  component="div"
-                  sx={{ fontWeight: 700 }}
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: 700,
+                    color: '#fff',
+                    lineHeight: 1.3,
+                    fontSize: '0.95rem',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}
                 >
-                  {x.Title}
+                  {movie.Title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  {x.Year}
+                <Typography
+                  variant="caption"
+                  sx={{ color: 'rgba(255,255,255,0.45)', mt: 0.5, display: 'block' }}
+                >
+                  {movie.Genre}
                 </Typography>
               </CardContent>
             </CardActionArea>
-
-            <CardActions sx={{ px: 2, pb: 2 }}>
-              <Button
-                size="small"
-                variant="contained"
-                onClick={() => {
-                  alert(`Shared: ${x.Title} (${x.Year})`)
-                }}
-                sx={{
-                  borderRadius: 999,
-                  textTransform: 'none',
-                  fontWeight: 600,
-                }}
-              >
-                Share
-              </Button>
-            </CardActions>
           </Card>
         </Grid>
       ))}
     </Grid>
   )
 }
-
-export default MovieCard
